@@ -9,6 +9,9 @@ const deps = require("./package.json").dependencies;
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    target: "esnext",
+  },
   plugins: [
     vue(),
     vueJsx(),
@@ -16,7 +19,7 @@ export default defineConfig({
       name: "gameRockPaperScissors2",
       filename: "remoteEntry.js",
       exposes: {
-        "./Content": "./src/components/HelloWorld.vue",
+        "./Content": "./src/components/HelloWorldSingleSPA",
       },
       shared: {
         ...deps,

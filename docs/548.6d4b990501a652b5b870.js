@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgame_rockpaperscissors2=self.webpackChunkgame_rockpaperscissors2||[]).push([[548],{548:(r,e,s)=>{s.r(e),s.d(e,{bootstrap:()=>c,default:()=>u,mount:()=>k,unmount:()=>m});var t=s(655),p=s(604),n=s.n(p),o=s(467),a=n()({createApp:t.createApp,appOptions:{render:function(){return(0,t.h)(o.Z,{})}}});const u=o.Z;var c=a.bootstrap,k=a.mount,m=a.unmount}}]);
