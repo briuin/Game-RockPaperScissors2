@@ -216,7 +216,7 @@ $GAME_MAX_WIDTH: 300px;
     background: rgba(0, 0, 0, 0.9);
     left: 0;
     top: 0;
-    z-index: 1000;
+    z-index: 200;
   }
 
   &_container {
