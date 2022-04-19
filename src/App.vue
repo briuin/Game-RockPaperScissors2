@@ -1,9 +1,10 @@
 <script setup>
 import Game from "./components/Game.vue";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 
 const props = defineProps({
-  player: String,
+  player: Object,
+  connection: Object,
 });
 
 const playerObj = computed(() => {
@@ -17,7 +18,7 @@ const shouldCreateGame = computed(() => {
   return props.player || isDevelopmentMode();
 });
 
-const isDevelopmentMode = () => true;
+const isDevelopmentMode = () => process.env.NODE_ENV === 'development';
 
 const isJsonString = (str) => {
   try {
@@ -30,5 +31,9 @@ const isJsonString = (str) => {
 </script>
 
 <template>
-  <Game v-if="shouldCreateGame" :playerDetail="playerObj"></Game>
+  <Game
+    v-if="shouldCreateGame"
+    :connection="connection"
+    :playerDetail="playerObj"
+  ></Game>
 </template>

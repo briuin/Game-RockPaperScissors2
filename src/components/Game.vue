@@ -50,64 +50,66 @@ import { onMounted, ref } from "vue";
 
 const props = defineProps({
   playerDetail: Object,
+  connection: Object,
 });
 
 let player = ref(new Player());
 
-let opponent = new Player();
-let connection;
-let resultMessage = "";
+let opponent = ref(new Player());
+let resultMessage = ref("");
 
 const choose = (option) => {
-  if (player.value.choice || !opponent.name) {
+  if (player.value.choice || !opponent.value.name) {
     return;
   }
   player.value.choice = option;
-  // connection.invoke(HubAction.Choose, option);
+  getSocket().emit("choose", option);
 };
 
 const reset = () => {
-  resultMessage = "";
+  resultMessage.value = "";
   player.value.choice = GameOption.Unknown;
-  opponent = new Player();
+  opponent.value = new Player();
 };
 
 const nextRound = () => {
   reset();
-  // connection.invoke(HubAction.NextRound, this.player.name);
+  getSocket().emit("nextRound", player.value.name);
+};
+
+const getSocket = () => {
+  return props.connection.socket;
 };
 
 onMounted(() => {
   player.value = { ...player.value, ...props.playerDetail };
-  opponent.name = "test";
-  /*this.connection = new HubConnectionBuilder().withUrl(CONFIG.HUB_URL).build();
 
-  this.connection.on("error", (data) => {
+  getSocket().on("connect", () => {
+    getSocket().emit("join", player.value.name);
+  });
+
+  getSocket().on("error", (data) => {
     alert(data);
   });
 
-  this.connection.on("opponentJoined", (data) => {
-    this.opponent.name = data;
+  getSocket().on("opponentJoined", (data) => {
+    opponent.value.name = data;
   });
 
-  this.connection.on("opponentMakeChoice", () => {
-    this.opponent.madeChoice = true;
+  getSocket().on("opponentMakeChoice", () => {
+    opponent.value.madeChoice = true;
   });
 
-  this.connection.on("opponentLeave", () => {
-    this.reset();
+  getSocket().on("opponentLeave", () => {
+    reset();
   });
 
-  this.connection.on("result", (data) => {
-    this.opponent.choice = data.opponentChoice;
+  getSocket().on("result", (data) => {
+    opponent.value.choice = data.opponentChoice;
     setTimeout(() => {
-      this.resultMessage = data.winner ? `${data.winner} Win!` : `Draw!`;
+      resultMessage.value = data.winner ? `${data.winner} Win!` : `Draw!`;
     }, 500);
   });
-
-  this.connection
-    .start()
-    .then(() => this.connection.invoke(HubAction.Join, this.player.name));*/
 });
 </script>
 

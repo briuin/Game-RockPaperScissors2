@@ -33,6 +33,8 @@ const vueLifecycles = singleSpaVue({
         mountParcel: this.mountParcel,
         singleSpa: this.singleSpa,
         */
+        player: this.player,
+        connection: this.connection,
       });
     },
   },
