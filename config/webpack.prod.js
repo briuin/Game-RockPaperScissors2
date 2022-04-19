@@ -16,7 +16,7 @@ const prodConfig = {
       name: 'gameRockPaperScissors2',
       filename: 'remoteEntry.js',
       exposes: {
-        './App': './src/bootstrap.js',
+        './App': './src/main.js',
       },
       shared: packageJson.dependencies,
     }),
