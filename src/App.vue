@@ -1,6 +1,6 @@
 <script setup>
 import Game from "./components/Game.vue";
-import { ref, computed } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   player: String,

@@ -79,7 +79,7 @@ const nextRound = () => {
 
 onMounted(() => {
   player.value = { ...player.value, ...props.playerDetail };
-  opponent.name = 'test';
+  opponent.name = "test";
   /*this.connection = new HubConnectionBuilder().withUrl(CONFIG.HUB_URL).build();
 
   this.connection.on("error", (data) => {
@@ -146,27 +146,27 @@ $GAME_MAX_WIDTH: 300px;
   margin: 0 auto;
   left: 0;
   right: 0;
+}
 
-  > div {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
+.option > div {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
 
-    &.rock {
-      background: url("../assets/rock.png") no-repeat;
-      background-size: contain;
-    }
+.rock {
+  background: url("../assets/rock.png") no-repeat;
+  background-size: contain;
+}
 
-    &.paper {
-      background: url("../assets/paper.png") no-repeat;
-      background-size: contain;
-    }
+.paper {
+  background: url("../assets/paper.png") no-repeat;
+  background-size: contain;
+}
 
-    &.scissors {
-      background: url("../assets/scissors.png") no-repeat;
-      background-size: contain;
-    }
-  }
+.scissors {
+  background: url("../assets/scissors.png") no-repeat;
+  background-size: contain;
 }
 
 .opponent,

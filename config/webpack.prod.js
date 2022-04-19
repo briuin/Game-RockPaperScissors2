@@ -16,7 +16,7 @@ const prodConfig = {
       name: 'gameRockPaperScissors2',
       filename: 'remoteEntry.js',
       exposes: {
-        './HelloWorld': './src/components/HelloWorldSingleSPA',
+        './App': './src/bootstrap.js',
       },
       shared: packageJson.dependencies,
     }),

@@ -23,7 +23,7 @@ const devConfig = {
       name: 'gameRockPaperScissors2',
       filename: 'remoteEntry.js',
       exposes: {
-        './HelloWorld': './src/components/HelloWorldSingleSPA',
+        './App': './src/main.js',
       },
       shared: packageJson.dependencies,
     }),

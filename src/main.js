@@ -13,7 +13,7 @@ const mountElement = (el) => {
 // call mount immediately
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === 'development') {
-  const devRoot = document.querySelector('#app');
+  const devRoot = document.querySelector('#_game-dev-root');
 
   if (devRoot) {
     mountElement(devRoot);

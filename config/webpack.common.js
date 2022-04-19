@@ -1,35 +1,65 @@
-const { VueLoaderPlugin } = require('vue-loader');
+const { VueLoaderPlugin } = require("vue-loader");
+const path = require("path");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    filename: '[name].[contenthash].js',
+    filename: "[name].[contenthash].js",
   },
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: [".ts", ".js", ".vue"],
+    alias: {
+      "@": path.join(__dirname, "..", "src"),
+    },
   },
   module: {
     rules: [
       {
         test: /\.(png|jpe?g|gif|woff|svg|eot|ttf)$/i,
-        use: [{ loader: 'file-loader' }],
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 10000,
+              esModule: false,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
       {
         test: /\.vue$/,
-        use: 'vue-loader',
+        use: "vue-loader",
       },
       {
         test: /\.scss|\.css$/,
-        use: ['vue-style-loader', 'style-loader', 'css-loader', 'sass-loader'],
+        resourceQuery: /module/,
+        use: [
+          "vue-style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: {
+                localIdentName: "[name]__[local]___[hash:base64:5]",
+              },
+            },
+          },
+          "sass-loader",
+        ],
       },
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-transform-runtime'],
+            presets: ["@babel/preset-env"],
+            plugins: ["@babel/plugin-transform-runtime"],
           },
         },
       },
