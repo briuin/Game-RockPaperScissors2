@@ -82,6 +82,7 @@ const getSocket = () => {
 };
 
 onMounted(() => {
+  console.log('name', props.connection.user.username);
   player.value = { ...player.value, name: props.connection.user.username };
 
   getSocket().on("connect", () => {
