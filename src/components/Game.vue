@@ -82,10 +82,7 @@ const getSocket = () => {
 };
 
 onMounted(() => {
-  player.value = { ...player.value, ...props.connection.user };
-  setInterval(() => {
-    console.log(props.connection.user);
-  }, 1000);
+  player.value = { ...player.value, name: props.connection.user.username };
 
   getSocket().on("connect", () => {
     getSocket().emit("join", player.value.name);
