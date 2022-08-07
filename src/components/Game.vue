@@ -57,6 +57,7 @@ let player = ref(new Player());
 
 let opponent = ref(new Player());
 let resultMessage = ref("");
+let joined = false;
 
 const choose = (option) => {
   if (player.value.choice || !opponent.value.name) {
@@ -82,11 +83,18 @@ const getSocket = () => {
 };
 
 onMounted(() => {
-  console.log('name', props.connection.user.username);
   player.value = { ...player.value, name: props.connection.user.username };
 
   getSocket().on("connect", () => {
-    getSocket().emit("join", player.value.name);
+    // getSocket().emit("join", player.value.name);
+  });
+
+  getSocket().on("infoUpdated", (info) => {
+    player.value = { ...player.value, name: info.username };
+
+    if (!joined) {
+      getSocket().emit("join", player.value.name);
+    }
   });
 
   getSocket().on("error", (data) => {
